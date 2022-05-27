@@ -1,0 +1,42 @@
+.news-form {
+  margin: 0px 13px 13px 13px;
+  padding: 5px;
+  border: 1px none black;
+  border-radius: 10px;
+  height: 550px;
+  width: 450px;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.news-form img {
+  border-radius: 5px;
+}
+
+.news-form p {
+  font: 400 18px "Roboto";
+}
+
+.news-form-a {
+  padding: 10px;
+  text-align: center;
+  line-height: 1.5;
+  font: 400 24px "Roboto";
+  width: 100%;
+}
+
+.news-form-a a {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.news-form-a a:hover {
+  text-decoration: underline;
+}
+
+.news-form-p {
+  margin-top: 10px;
+  font: 400 20px "Roboto";
+  width: 100%;
+}
