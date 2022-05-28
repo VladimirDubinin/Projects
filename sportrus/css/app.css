@@ -1,0 +1,66 @@
+.form-body {
+	width: 1000px;
+	margin: 0px auto;
+}
+
+.logo {
+	margin: 0px auto;
+	height: 100px;
+	width: 100px;
+}
+
+.form-reg {
+	margin: 50px auto;
+	padding: 5px;
+	border: 1px none black;
+	border-radius: 10px;
+	height: 450px;
+	width: 450px;
+	font: 400 32px 'Roboto';
+}
+.form-reg p{
+	margin: 10px;
+	width: 100%;
+	text-align: center;
+}
+.input-reg {
+	margin: 20px auto;
+	padding: 0px 10px;
+	height: 56px;
+	width: 450px;
+	border-radius: 10px;
+	border: 1px solid black;
+	font: 400 18px 'Roboto';
+	background-color: #f2f5f9;
+}
+.btn-reg {
+	margin: 20px auto;
+	padding: 0px 10px;
+	height: 56px;
+	width: 472px;
+	border-radius: 10px;
+	border: 1px solid black;
+	font: 400 24px 'Roboto';
+	background-color: #ffb841;
+}
+.btn-reg:hover {
+	cursor: pointer;
+}
+
+#message {
+	background-color: #FA8072;
+	border-radius: 5px;
+	width: 452px;
+	border: 1px solid black;
+	margin: 20px auto;
+	padding: 10px;
+	font: 400 18px 'Roboto';
+	visibility: hidden;
+}
+
+.footer {
+	padding: 10px;
+	line-height: 1.5; 
+	font: 14px 'Roboto';
+	text-align:center;
+}
