@@ -1,0 +1,104 @@
+.match-form {
+	margin: 0px 13px 13px 13px;
+	padding: 5px;
+	border: 1px none black;
+	border-radius: 10px;
+	height: 330px;
+	width: 450px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.match-list {
+	width: 100%;
+}
+
+.t-cap-football {
+	text-align: center;
+	border-bottom: 1px solid #ffb841;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+}
+.t-cap-football a{
+	color: #ffb841;
+	text-decoration: none;
+}
+.t-cap-football a:hover{
+	text-decoration: underline;	
+}
+
+.t-cap-hockey {
+	text-align: center;
+	border-bottom: 1px solid #449ddd;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+}
+.t-cap-hockey a{
+	color: #449ddd;
+	text-decoration: none;
+}
+.t-cap-hockey a:hover{
+	text-decoration: underline;	
+}
+
+.t-cap-basket {
+	text-align: center;
+	border-bottom: 1px solid #6a8541;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+}
+.t-cap-basket a{
+	color: #6a8541;
+	text-decoration: none;
+}
+.t-cap-basket a:hover{
+	text-decoration: underline;	
+}
+
+.t-cap-voley {
+	text-align: center;
+	border-bottom: 1px solid #ba3f03;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+}
+.t-cap-voley a{
+	color: #ba3f03;
+	text-decoration: none;
+}
+.t-cap-voley a:hover{
+	text-decoration: underline;	
+}
+
+.host {
+	text-align: right;
+	width: 190px;
+	height: 25px;
+}
+.h-goal {
+	text-align: right;
+	width: 35px;
+	height: 25px;
+}
+.h-goal-time {
+	text-align: right;
+	width: 35px;
+	height: 25px;
+	color: grey;
+}
+
+.guest {
+	text-align: left;
+	width: 190px;
+	height: 25px;
+}
+.g-goal {
+	text-align: left;
+	width: 35px;
+	height: 25px;
+}
+.g-goal-time {
+	text-align: left;
+	width: 35px;
+	height: 25px;
+	color: grey;
+}
