@@ -31,6 +31,7 @@ class UsersControl extends Controller
 		
 		$user = User::create($validateF);
 		if($user) {
+			//mail($validateF['email'],'Дарова','И добро пожаловать!');
 			Auth::login($user);
 			return redirect('/');
 		}
