@@ -15,7 +15,7 @@
 			<div class="main-news">
 				<?php 
 				$page = (isset($_GET['page'])) ? $_GET['page'] : 1;
-				$limit = 8;
+				$limit = 10;
 				$offset = $limit * ($page - 1);
 				$q = $db->query("SELECT * FROM news ORDER BY date DESC LIMIT $limit OFFSET $offset");
 				foreach ($q as $news) {

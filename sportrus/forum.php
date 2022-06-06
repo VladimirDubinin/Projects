@@ -26,7 +26,12 @@
 				</form>	
 				<p class="ms">ОТЗЫВЫ</p><br>
 				<?php 
-				} else echo '<hr><p class="ms">ОТЗЫВЫ</p>';;
+				} else { ?>
+				<div class="comment-add">
+					<p class="ms">Авторизуйтесь, чтобы добавить отзыв</p>
+				</div>	
+				<p class="ms">ОТЗЫВЫ</p><br>
+				<?php }
 				$q = $db->query("SELECT * FROM reviews INNER JOIN users ON reviews.user_id = users.id ORDER BY reviews.date DESC");
 				foreach ($q as $res) {
 					$date = date('H:i d.m.Y ',strtotime($res['date']));

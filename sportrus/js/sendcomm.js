@@ -5,7 +5,7 @@ $(document).ready(function() {
 		var id = $("#userid").val();
 		var nid = $("#newsid").val();
 		
-		if (comm != '') {
+		if (comm !== '') {
 			$.ajax({
 				url: "php/comm.php",
 				type: "POST",

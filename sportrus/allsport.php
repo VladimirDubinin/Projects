@@ -33,7 +33,7 @@ else $sport_id = $_GET['sport'];
 				<div class="main-matches">
 					<p class="ms">МАТЧИ<a href="allmatches.php">Все матчи</a></p>
 					<div class="match-form-main">
-						<table class="match-list">
+						<div class="match-list">	
 							<?php
 							$col1 = ceil($count/2);
 							$col2 = $count - $col1;
@@ -42,56 +42,46 @@ else $sport_id = $_GET['sport'];
 							foreach ($q as $match) {
 								if($match['ended'] == false) {
 									$date = strtotime($match['date']);
-									$host = date('H',$date);
-									$guest = date('i',$date);
-									$host_cl = 'h-goal-time';
-									$guest_cl = 'g-goal-time';
+									$separator = date('H',$date).' : '.date('i',$date);			//чтобы внешне отличать несыгранные и сыгранные матчи
 								} else {
-									$host = $match['hostgoals'];
-									$guest = $match['guestgoals'];
-									$host_cl = 'h-goal';
-									$guest_cl = 'g-goal';								
+									$separator = $match['hostgoals'].' - '.$match['guestgoals'];								
 								}
 							?>
-							<tr>
-								<td class="host"><?=$match['hostteam']?></td>
-								<td class="<?=$host_cl?>"><?=$host?> :</td>
-								<td class="<?=$guest_cl?>"><?=$guest?></td>
-								<td class="guest"><?=$match['guestteam']?></td>
-							</tr>
+							<a href="matchview.php?id=<?=$match['id']?>" class="match-link">
+							<div class="match">
+								<div class="host"><?=$match['hostteam']?></div>
+								<div class="separator"><?=$separator?></div>
+								<div class="guest"><?=$match['guestteam']?></div>
+							</div>	
+							</a>
 							<?php
 							}
 							?>	
-						</table>
+						</div>
 					</div>	
-					<div class="match-form-main">	
-						<table class="match-list">
+					<div class="match-form-main">
+						<div class="match-list">
 							<?php
 							$q = $db->query("SELECT * FROM matches WHERE sport = $sport_id AND date BETWEEN DATE_ADD(CURDATE(), INTERVAL $startdate DAY) AND DATE_ADD(CURDATE(), INTERVAL $enddate DAY) ORDER BY date DESC LIMIT $col2 OFFSET $col1");
 							foreach ($q as $match) {
 								if($match['ended'] == false) {
 									$date = strtotime($match['date']);
-									$host = date('H',$date);
-									$guest = date('i',$date);
-									$host_cl = 'h-goal-time';
-									$guest_cl = 'g-goal-time';
+									$separator = date('H',$date).' : '.date('i',$date);			//чтобы внешне отличать несыгранные и сыгранные матчи
 								} else {
-									$host = $match['hostgoals'];
-									$guest = $match['guestgoals'];
-									$host_cl = 'h-goal';
-									$guest_cl = 'g-goal';								
+									$separator = $match['hostgoals'].' - '.$match['guestgoals'];								
 								}
 							?>
-							<tr>
-								<td class="host"><?=$match['hostteam']?></td>
-								<td class="<?=$host_cl?>"><?=$host?> :</td>
-								<td class="<?=$guest_cl?>"><?=$guest?></td>
-								<td class="guest"><?=$match['guestteam']?></td>
-							</tr>
+							<a href="matchview.php?id=<?=$match['id']?>" class="match-link">
+							<div class="match">
+								<div class="host"><?=$match['hostteam']?></div>
+								<div class="separator"><?=$separator?></div>
+								<div class="guest"><?=$match['guestteam']?></div>
+							</div>	
+							</a>
 							<?php
 							}
 							?>	
-						</table>
+						</div>
 					</div>
 				</div>	
 				<?php 

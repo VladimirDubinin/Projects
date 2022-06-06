@@ -64,7 +64,12 @@ else $id = $_GET['id'];
 				</form>	
 				<p class="ms">КОММЕНТАРИИ</p><br>
 				<?php 
-				} else echo '<hr><p class="ms">КОММЕНТАРИИ</p>';
+				} else { ?>
+				<div class="comment-add">
+					<p class="ms">Авторизуйтесь, чтобы добавить комментарий</p><br>
+				</div>	
+				<p class="ms">КОММЕНТАРИИ</p><br>
+				<?php } 
 				$q = $db->query("SELECT * FROM comments INNER JOIN users ON comments.user_id = users.id WHERE news_id = '$id' ORDER BY date DESC");
 				foreach ($q as $res) {
 					$date = date('H:i d.m.Y ',strtotime($res['date']));

@@ -3,7 +3,7 @@ $(document).ready(function() {
 		e.preventDefault();
 		let id = $("#com-id").val();
 		let fc = $(this).parents("#form-comment");
-		if (id != '') {
+		if (id !== '') {
 			$.ajax({
 				url: "php/commdelete.php",
 				type: "POST",

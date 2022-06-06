@@ -5,7 +5,7 @@ $(document).ready(function() {
 		var theme = $("#theme").val();
 		var comm = $("#comm").val();
 		
-		if ((comm != '') && (theme != '')) {
+		if ((comm !== '') && (theme !== '')) {
 			$.ajax({
 				url: "php/review.php",
 				type: "POST",

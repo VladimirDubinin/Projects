@@ -6,40 +6,64 @@
 	<title>SportRus</title>
 	<link rel="stylesheet" href="css\main.css">
 	<link rel="stylesheet" href="css\tables.css">
+	<script type="text/javascript" src="js/select.date.js"></script>
 </head>
 <body>
 	<div class="cite-body">
-		<?php require('inc/header.php'); ?>
+		<?php require('inc/header.php'); 
+		if(isset($_GET['sdate'],$_GET['fdate'])) {
+			$sdate = $_GET['sdate'];
+			$fdate = $_GET['fdate'];
+		} else {
+			$sdate = date('Y-m-d', strtotime('-1 year'));
+			$fdate = date("Y-m-d");
+		}
+		?>
 		
 		<main class="container">
 			<h1>Результаты</h1>
 			<div class="main-matches">
+				<div class="set-data" id="set-data">
+					<span id="all" class="data-left selected">За всё время</span>
+					<span id="sep" class="data-mid"> | </span>
+					<span id="period" class="data-right">За период</span>
+					<div class="date-container" id="date-container">
+						<label>с <input type="date" class="date" id="start" name="start"  value="<?=$sdate?>" min="1970-01-01" max="<?=$fdate?>"></label>
+						<label>по <input type="date" class="date" id="finish" name="finish"  value="<?=$fdate?>" min="1970-01-01" max="<?=$fdate?>"></label>
+						<button class="btn-show" id="show">Применить</button>
+					</div>	
+				</div>
 				<?php
-				$count = $db->query('SELECT DISTINCT(sport) as id,sport_name,alias FROM matches INNER JOIN sports ON sport = sport_id');
+				$count = $db->query("SELECT count(id) as c,sport,sport_name,alias FROM matches INNER JOIN sports ON sport = sport_id WHERE date BETWEEN '$sdate' AND '$fdate' group by sport");
 				foreach($count as $vid_sporta) {
-					$id = $vid_sporta['id'];
+					$id = $vid_sporta['sport'];
 					$name = $vid_sporta['sport_name'];
 					$alias = $vid_sporta['alias'];
 				?>
-				<div class="match-form">
-					<table class="match-list">
-						<caption class="t-cap-<?=$alias?>"><a href="allsport.php?sport=<?=$id?>&page=1"><?=mb_strtoupper($name)?></a></caption>
+				<div class="match-form-main">
+					<div class="match-list">	
+						<p class="t-cap <?=$alias?>"><a href="allsport.php?sport=<?=$id?>&page=1"><?=mb_strtoupper($name)?></a></p>
 						<?php
-						$startdate = -360; //Потенциально чтобы не выводить слишком старые матчи, но новых матчей в базе пока больше не предвидится, поэтому выводим даже прошлогодние
-						$enddate = 1;
-						$q = $db->query("SELECT * FROM matches WHERE sport = $id AND date BETWEEN DATE_ADD(CURDATE(), INTERVAL $startdate DAY) AND DATE_ADD(CURDATE(), INTERVAL $enddate DAY) ORDER BY date DESC LIMIT 10");
-						foreach ($q as $news) {
+						$q = $db->query("SELECT * FROM matches WHERE sport = $id AND date BETWEEN '$sdate' AND '$fdate' ORDER BY date DESC");
+						foreach ($q as $match) {
+							if($match['ended'] == false) {
+								$date = strtotime($match['date']);
+								$separator = date('H',$date).' : '.date('i',$date);			//чтобы внешне отличать несыгранные и сыгранные матчи
+							} else {
+								$separator = $match['hostgoals'].' - '.$match['guestgoals'];								
+							}
 						?>
-						<tr>
-							<td class="host"><?=$news['hostteam']?></td>
-							<td class="h-goal"><?=$news['hostgoals']?> :</td>
-							<td class="g-goal"><?=$news['guestgoals']?></td>
-							<td class="guest"><?=$news['guestteam']?></td>
-						</tr>
+						<a href="matchview.php?id=<?=$match['id']?>" class="match-link">
+						<div class="match">
+							<div class="host"><?=$match['hostteam']?></div>
+							<div class="separator"><?=$separator?></div>
+							<div class="guest"><?=$match['guestteam']?></div>
+						</div>	
+						</a>
 						<?php
 						}
 						?>	
-					</table>
+					</div>
 				</div>
 				<?php
 				}

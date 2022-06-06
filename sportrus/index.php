@@ -6,6 +6,8 @@
 	<title>SportRus</title>
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/tables.css">
+	<link rel="stylesheet" href="css/slider.css">
+	<script type="text/javascript" src="js/slider.script.js"></script>
 </head>
 <body>
 	<div class="cite-body">
@@ -23,56 +25,61 @@
 					$alias = $vid_sporta['alias'];
 				?>
 				<div class="match-form-main">
-					<table class="match-list">
-						<caption class="t-cap-<?=$alias?>"><a href="allsport.php?sport=<?=$id?>&page=1"><?=mb_strtoupper($name)?></a></caption>
+					<div class="match-list">	
+						<p class="t-cap <?=$alias?>"><a href="allsport.php?sport=<?=$id?>&page=1"><?=mb_strtoupper($name)?></a></p>
 						<?php
-						$q = $db->query("SELECT * FROM matches INNER JOIN sports ON sport = sport_id WHERE sport = $id ORDER BY date DESC LIMIT 3");
+						$q = $db->query("SELECT * FROM matches INNER JOIN sports ON sport = sport_id WHERE sport = $id ORDER BY date DESC LIMIT 5");
 						foreach ($q as $match) {
 							if($match['ended'] == false) {
 								$date = strtotime($match['date']);
-								$host = date('H',$date);
-								$guest = date('i',$date);
-								$host_cl = 'h-goal-time';
-								$guest_cl = 'g-goal-time';
+								$separator = date('H',$date).' : '.date('i',$date);			//чтобы внешне отличать несыгранные и сыгранные матчи
 							} else {
-								$host = $match['hostgoals'];
-								$guest = $match['guestgoals'];
-								$host_cl = 'h-goal';
-								$guest_cl = 'g-goal';								
+								$separator = $match['hostgoals'].' - '.$match['guestgoals'];								
 							}
 						?>
-						<tr>
-							<td class="host"><?=$match['hostteam']?></td>
-							<td class="<?=$host_cl?>"><?=$host?> :</td>
-							<td class="<?=$guest_cl?>"><?=$guest?></td>
-							<td class="guest"><?=$match['guestteam']?></td>
-						</tr>
-						<?php
+						<a href="matchview.php?id=<?=$match['id']?>" class="match-link">
+						<div class="match">
+							<div class="host"><?=$match['hostteam']?></div>
+							<div class="separator"><?=$separator?></div>
+							<div class="guest"><?=$match['guestteam']?></div>
+						</div>	
+						</a>
+						<?
 						}
 						?>	
-					</table>
-				</div>
-				<?php
+					</div>
+				</div>	
+				<?
 				}
 				?>
 			</div>
 			
-			<div class="main-news">
+			<div class="main-news slider-container">
 				<p class="ms">ПОСЛЕДНИЕ НОВОСТИ <a href="allnews.php?page=1">Все новости</a></p>
 				<?php
-				$q = $db->query("SELECT * FROM news INNER JOIN sports ON theme=sport_id ORDER BY date DESC LIMIT 4");
-				foreach($q as $news){
-				?>
-				<div class="news-form">
-					<img src="<?=$news['img']?>" alt="<?=$news['title']?>" width="450" height="255">
-						<div class="news-form-a">
-							<a href="viewing.php?id=<?=$news['id']?>"><?=$news['title']?></a>
-						</div>	
-						<div class="news-form-p">
-							<span><?=$news['short']?></span>
-						</div>	
-				</div>
-				<?php
+				$themes = $db->query("SELECT theme,count(theme) FROM news GROUP BY theme ORDER BY count(theme) DESC LIMIT 4");
+				foreach($themes as $theme){
+					?> <div class="slider"> <?php
+					$id = $theme['theme'];
+					$query = $db->query("SELECT * FROM news INNER JOIN sports ON theme=sport_id WHERE theme=$id ORDER BY date DESC LIMIT 5");
+					foreach($query as $news){
+					?>
+					<div class="slide fade">
+						<img src="<?=$news['img']?>" class="slide-img" alt="Picture">
+						<div class="slide-head-text"><a href="allsport.php?sport=<?=$news['sport_id']?>&page=1"><?=$news['sport_name']?></a></div>
+						<div class="slide-img-text"><a href="viewing.php?id=<?=$news['id']?>"><?=$news['title']?></a></div>
+					</div>
+					<?
+					}
+					?> 
+					<div class="dot-container">
+					<?php for($i = 0; $i < $query->num_rows; $i++) { ?>
+						<span class="dot"></span>
+					<? } ?>	
+					</div>	
+					<a class="prev">&#10094</a>
+					<a class="next">&#10095</a>
+					</div> <?
 				}
 				?>	
 			</div>			

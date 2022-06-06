@@ -46,13 +46,13 @@ if($_SESSION['userid'] != 1) {
 				$date = date('H:i d.m.Y ',strtotime($res['date']));
 			?>
 			
-			<form class="comment" id="form-comment" action="" method="POST">
-				<div class="comment-name"><a href="viewing.php?id=<?=$res['id']?>"><?=$res['title']?></a></div>
+			<form class="news-small" id="form-comment" action="" method="POST">
+				<div class="news-small-head"><a href="viewing.php?id=<?=$res['id']?>"><?=$res['title']?></a></div>
 				<input type="hidden" value="<?=$res['id']?>" name="news-id" id="news-id">
 				<button id="del" class="comment-del"><img width="14" alt="delete" height="14" src="img/X.jpg"></button>
-				<div class="comment-img"><img width="75" alt="avatar" height="75" src="<?=$res['img']?>"></div>
-				<div class="comment-info"><?=$date?></div>
-				<div class="comment-text"><?=$res['short']?></div>
+				<img class="news-small-img" alt="avatar" src="<?=$res['img']?>">
+				<div class="news-small-body"><small><?=$date?></small></div>
+				<div class="news-small-body"><?=$res['short']?></div>
 			</form>	
 			
 			<?php

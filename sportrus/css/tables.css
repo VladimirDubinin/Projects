@@ -4,7 +4,7 @@
 	border: 1px none black;
 	border-radius: 10px;
 	height: 330px;
-	width: 450px;
+	width: 400px;
 	display: inline-block;
 	vertical-align: top;
 }
@@ -13,92 +13,99 @@
 	width: 100%;
 }
 
-.t-cap-football {
+.t-cap{
 	text-align: center;
-	border-bottom: 1px solid #ffb841;
-	margin-bottom: 5px;
+	margin: 0px auto;
 	padding-bottom: 5px;
 }
-.t-cap-football a{
+.t-cap a:hover{
+	text-decoration: underline;
+}
+
+.football {
+	border-bottom: 1px solid #ffb841;
 	color: #ffb841;
 	text-decoration: none;
 }
-.t-cap-football a:hover{
-	text-decoration: underline;	
-}
-
-.t-cap-hockey {
-	text-align: center;
+.hockey {
 	border-bottom: 1px solid #449ddd;
-	margin-bottom: 5px;
-	padding-bottom: 5px;
-}
-.t-cap-hockey a{
 	color: #449ddd;
 	text-decoration: none;
 }
-.t-cap-hockey a:hover{
-	text-decoration: underline;	
-}
-
-.t-cap-basket {
-	text-align: center;
+.basket {
 	border-bottom: 1px solid #6a8541;
-	margin-bottom: 5px;
-	padding-bottom: 5px;
-}
-.t-cap-basket a{
 	color: #6a8541;
 	text-decoration: none;
 }
-.t-cap-basket a:hover{
-	text-decoration: underline;	
-}
-
-.t-cap-voley {
-	text-align: center;
+.voley {
 	border-bottom: 1px solid #ba3f03;
-	margin-bottom: 5px;
-	padding-bottom: 5px;
-}
-.t-cap-voley a{
 	color: #ba3f03;
 	text-decoration: none;
 }
-.t-cap-voley a:hover{
-	text-decoration: underline;	
+.football a{
+	color: #ffb841;
+	text-decoration: none;
 }
+.hockey a{
+	color: #449ddd;
+	text-decoration: none;
+}
+.basket a{
+	color: #6a8541;
+	text-decoration: none;
+}
+.voley a{
+	color: #ba3f03;
+	text-decoration: none;
+}
+
 
 .host {
 	text-align: right;
-	width: 190px;
+	width: 180px;
 	height: 25px;
+	display: inline-block;
 }
-.h-goal {
-	text-align: right;
-	width: 35px;
-	height: 25px;
-}
-.h-goal-time {
-	text-align: right;
-	width: 35px;
-	height: 25px;
-	color: grey;
-}
-
 .guest {
 	text-align: left;
-	width: 190px;
+	width: 180px;
 	height: 25px;
+	display: inline-block;
 }
-.g-goal {
-	text-align: left;
-	width: 35px;
-	height: 25px;
+.separator {
+	text-align: center;
+	width: 76px;
+	display: inline-block;
 }
-.g-goal-time {
+
+.add-host {
+	text-align: right;
+	width: 120px;
+	height: 20px;
+	display: inline-block;
+	font: 400 12px 'Roboto';
+}
+.add-guest {
 	text-align: left;
-	width: 35px;
-	height: 25px;
-	color: grey;
+	width: 120px;
+	height: 20px;
+	display: inline-block;
+	font: 400 12px 'Roboto';
+}
+.add-separator {
+	text-align: center;
+	width: 57px;
+	display: inline-block;
+	font: 400 12px 'Roboto';
+}
+
+.match-link {
+	color: black;
+	text-decoration: none;
+}
+.match {
+	padding-top: 8px;
+}
+.match-link:hover > .match {
+	background-color: rgba(225, 225, 225, .5);
 }

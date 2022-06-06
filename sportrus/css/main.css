@@ -237,12 +237,37 @@ hr {
 .ms2 a:hover{
 	text-decoration: underline;
 }
-
+.match-add-head {
+	text-align: center;	
+	font: 16px 'Roboto';
+}
 .container-view {
 	width: 650px;
 	height: 100%;
 	padding: 0px 15px 50px 50px;
 	display: inline-block;
+}
+.container-match-head {
+	width: 650px;
+	height: 100%;
+	padding: 0px 15px 15px 10px;
+	display: inline-block;
+}
+.container-matchview {
+	height: 100%;
+	display: inline-block;
+	padding: 0px 15px;
+}
+.container-matchadd {
+	width: 304px;
+	height: 100%;
+	padding: 5px;
+	margin-left: 1px;
+	display: inline-block;
+	vertical-align: top;
+	border-left: 1px solid grey;
+	border-bottom: 1px solid grey;
+	border-top: 1px solid grey;
 }
 .container-add {
 	width: 271px;
@@ -265,7 +290,7 @@ hr {
 	cursor: pointer;
 }
 .btn-change {
-	margin: 0px 15px 10px;
+	margin: 10px 15px;
 	height: 30px;
 	width: 262px;
 	border-radius: 5px;
@@ -344,6 +369,85 @@ hr {
 	padding: 5px;
 }
 
+.videoplayer {
+	width: 650px;
+	margin: 0px 15px 50px;
+	display: inline-block;
+}
+.news-small {
+	width: 100%;
+	display: inline-block;
+	border-bottom: 1px solid #f3f3f3;
+	height: 100%;
+	padding: 5px 0px; 
+}
+.news-small-head {
+	font: 16px 'Roboto';
+	display: inline-block;
+	padding: 2px 5px 10px;
+	max-width: 800px;
+}
+.news-small-head a{
+	color: black;
+}
+.news-small-body {
+	font: 14px 'Roboto';
+	display: inline-block;
+	padding: 0px 5px 10px;
+	max-width: 800px;
+}
+.news-small-img {
+	width: 125px;
+	display: inline-block;
+	float: left;	
+	padding: 5px 0px; 
+}
+
+.set-data {
+	margin: 0px 0px 20px 20px;
+	font: 16px 'Roboto';
+}
+
+.data-left {
+	cursor: pointer;
+}
+.data-mid {
+	cursor: auto;
+	padding: 0px 10px;
+}
+.data-right {
+	cursor: pointer;
+}
+.selected {
+	text-decoration: underline;
+	cursor: auto;
+}
+.date-container {
+	display: inline-block;
+	margin-left: 20px;
+	visibility: hidden;
+}
+.date {
+	font: 14px 'Roboto';
+	margin: 0px 10px 0px 5px;
+	border-radius: 2px;
+	border: 1px solid black;
+	cursor: pointer;
+	padding: 2px;
+}
+.btn-show {
+	margin: 0px 10px;
+	padding: 3px 5px;
+	border-radius: 5px;
+	border: 1px solid black;
+	font: 14px 'Roboto';
+	background-color: #ffb841;
+	cursor: pointer;
+}
+#all > a {
+	text-decoration: none;
+	color: black;
+}
 
 .footer {
 	padding: 10px;

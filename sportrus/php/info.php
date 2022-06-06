@@ -8,5 +8,5 @@ if(isset($_POST['id'],$_POST['surn'],$_POST['name'],$_POST['lastn'],$_POST['abou
 	require('dbconnect.php');
 	$db->query("UPDATE users SET surname = '$surn', name = '$name', lastname = '$lastn', about = '$about'  WHERE id = '$id'");
 	echo 'Success';
-} else
-echo 'Error';
+} 
+else echo 'Error';
