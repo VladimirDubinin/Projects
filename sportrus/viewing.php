@@ -75,7 +75,7 @@ else $id = $_GET['id'];
 					$date = date('H:i d.m.Y ',strtotime($res['date']));
 					?>
 					<form class="comment" id="form-comment" action="" method="POST">
-						<div class="comment-img"><img width="75" alt="avatar" height="75" src="<?=$res['avatar']?>"></div>
+						<img class="comment-img" alt="avatar" src="<?=$res['avatar']?>">
 						<?php 
 						if(isset($_SESSION['userid'])) {
 							if($res['user_id'] == $_SESSION['userid']) {?>

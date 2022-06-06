@@ -70,11 +70,12 @@
 
 .comment-img {
 	width: 75px;
-	width: 75px;
-	display: inline-block;
+	height: 75px;
+	border-radius: 50%;
 	float: left;	
-	padding: 5px 0px 0px; 
+	padding: 5px; 
 }
+
 .write-com {
 	margin: 0px 15px 15px;		
 	font: 14px 'Roboto';
