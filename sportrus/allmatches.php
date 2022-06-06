@@ -28,8 +28,8 @@
 					<span id="sep" class="data-mid"> | </span>
 					<span id="period" class="data-right">За период</span>
 					<div class="date-container" id="date-container">
-						<label>с <input type="date" class="date" id="start" name="start"  value="<?=$sdate?>" min="1970-01-01" max="<?=$fdate?>"></label>
-						<label>по <input type="date" class="date" id="finish" name="finish"  value="<?=$fdate?>" min="1970-01-01" max="<?=$fdate?>"></label>
+						<label>с <input type="date" class="date" id="start" name="start"  value="<?=$sdate?>" min="1970-01-01" max="<?=date("Y-m-d")?>"></label>
+						<label>по <input type="date" class="date" id="finish" name="finish"  value="<?=$fdate?>" min="1970-01-01" max="<?=date("Y-m-d")?>"></label>
 						<button class="btn-show" id="show">Применить</button>
 					</div>	
 				</div>
