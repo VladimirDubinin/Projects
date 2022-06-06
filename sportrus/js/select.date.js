@@ -28,9 +28,7 @@ window.onload = function() {
 		if(start.value > finish.value) start.value = finish.value;
 	});
 	finish.addEventListener("blur", function() {
-		let today = new Date();
-		console.log(today);
-		if(finish.value > today) finish.value = today;
+		if(start.value > finish.value) finish.value = start.value;
 	});
 	
 	function showDateController() {
