@@ -74,7 +74,7 @@
 					?> 
 					<div class="dot-container">
 					<?php for($i = 0; $i < $query->num_rows; $i++) { ?>
-						<span class="dot"></span>
+						<span class="dot" data-num="<?=$i?>"></span>
 					<? } ?>	
 					</div>	
 					<a class="prev">&#10094</a>

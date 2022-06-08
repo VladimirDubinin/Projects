@@ -73,7 +73,7 @@
 	border-radius: 3px 0px 0px 3px;
 }
 .dot {
-	//cursor: pointer;
+	cursor: pointer;
 	height: 13px;
 	width: 13px;
 	margin: 0 5px;
