@@ -34,8 +34,7 @@
 			</li>
 			@endif
 		</ul>		
-		<form class="d-flex me-5" method="GET" action="{{route('search')}}">
-			@csrf
+		<form class="d-flex me-5" method="GET" action="{{route('search')}}">			
 			<input class="form-control me-2" id="query" name="query" type="search" placeholder="Введите запрос..." aria-label="Search">
 			<button class="btn btn-light" type="submit">Поиск</button>
 		</form>

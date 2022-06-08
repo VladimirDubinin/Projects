@@ -38,28 +38,32 @@ class GoodsControl extends Controller
 		return view('catalog',['goods' => Goods::all()]);
 	}*/
 	
-	public function showCategory(Request $req, $alias, $orderby = 'default') { 
-		$goods = Goods::join('categories', 'type', '=', 'cat_id')->where('alias','=',$alias)->paginate(12);
-		$order = $orderby;
-		if(isset($req->orderby)) {
-			$order = $req->orderby;
+	public function showCategory(Request $req, $alias, $orderby = null, $min = null, $max = null, $vendor = null) { 
+		$goods = Goods::join('categories', 'type', '=', 'cat_id')->where('alias','=',"$alias");
+		$vendors = Goods::select('vendor')->join('categories', 'type', '=', 'cat_id')->where('alias','=',"$alias")->groupBy('vendor')->get();
+		
+		if($req->vendor !== null) {
+			$goods->where('vendor', $req->vendor);
 		}
 		
-		if($order == 'price-lh') {
-			$goods = Goods::join('categories', 'type', '=', 'cat_id')->where('alias','=',$alias)->orderBy('cost', 'asc')->paginate(12);
-		} else 
-		if($order == 'price-hl') {
-			$goods = Goods::join('categories', 'type', '=', 'cat_id')->where('alias','=',$alias)->orderBy('cost', 'desc')->paginate(12);
-		} else 
-		if($order == 'alphabet') {
-		$goods = Goods::join('categories', 'type', '=', 'cat_id')->where('alias','=',$alias)->orderBy('name', 'asc')->paginate(12);
+		if($req->min !== null && $req->max !== null) {
+			$goods->whereBetween('cost', [$req->min,$req->max]);
 		}
-
+		
+		if($req->orderby == 'price-lh') {
+			$goods->orderBy('cost', 'asc');
+		} else 
+		if($req->orderby == 'price-hl') {
+			$goods->orderBy('cost', 'desc');
+		} else 
+		if($req->orderby == 'alphabet') {
+			$goods->orderBy('name', 'asc');
+		}
+		
 		if($req->ajax()) {
-			return view('ajax.orderby', ['goods' => $goods])->render();
+			return view('ajax.orderby', ['goods' => $goods->paginate(10)])->render();
 		}
-		
-		return view('category', ['goods' => $goods,'alias' => $alias]);
+		return view('category', ['goods' => $goods->paginate(10),'alias' => $alias, 'vendors' => $vendors]);
 	}
 	
 	public function oneProduct($id) {

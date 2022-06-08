@@ -39,7 +39,7 @@
 
 @section('body')
 <h1 class="header">Корзина</h1>
-<div class="goods">
+<div class="main-goods">
 @if(count($items) == 0)
 	<a href="/" class="link-left mb-4" id="sel"><h4 class="fw-normal head link-h">Выбрать товары...</h4></a>
 @else

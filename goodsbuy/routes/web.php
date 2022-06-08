@@ -23,7 +23,7 @@ Route::get('/clearcart', 'App\Http\Controllers\CartControl@cartClear')->name('cl
 Route::get('/search', 'App\Http\Controllers\GoodsControl@searchProducts')->name('search');
 Route::post('/addcomment', 'App\Http\Controllers\CommentControl@submit')->name('addcomment');
 
-Route::get('/category/{alias}/{orderby?}', 'App\Http\Controllers\GoodsControl@showCategory')->name('category');
+Route::get('/category/{alias}/{orderby?}{min?}{max?}{vendor?}', 'App\Http\Controllers\GoodsControl@showCategory')->name('category');
 Route::get('/product/{id}', 'App\Http\Controllers\GoodsControl@oneProduct')->name('product');
 
 Route::get('/contacts', function(){

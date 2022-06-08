@@ -2,16 +2,26 @@ body {
 	background-color:#f6f6f6;
 	min-height: 100%;
 }
-
 .header {
 	text-align: center;
 	font-size: 40px;
 	margin-bottom: 40px;
 }
-
+.main-goods {
+	width: 100%;
+	display: block;
+	max-width: 1220px;
+	margin-left: auto;
+}
+.goods {
+	width: 100%;
+	display: inline-block;
+	max-width: 1220px;
+	margin-left: auto;
+}
 .goods-form {
   padding: 5px;
-  height: 500px;
+  height: 450px;
   width: 275px;
   display: inline-block;
   overflow: hidden;
@@ -21,6 +31,31 @@ body {
   height: 150px;
   width: 150px;
   margin-bottom: 10px;
+}
+.goods-form-flex {
+  padding: 5px;
+  height: 170px;
+  width: 100%;
+  display: flex;
+  background-color: white;
+  margin: 5px 0px;
+  border-radius: 10px;
+}
+.goods-form-flex-body {
+  padding-left: 20px;
+  width: 85%;
+  position: relative;
+}
+.goods-form-flex .image {
+  margin: 5px;
+  height: 150px;
+  width: 150px;
+}
+.btn-add {
+	width: 150px;
+	position: absolute;
+	top: 120px;
+	left: 20px;
 }
 
 .cart-form {
@@ -56,13 +91,6 @@ body {
 
 .head{
 	font-size: 18px;	
-}
-
-.goods {
-	width: 100%;
-	display: block;
-	max-width: 1220px;
-	margin-left: auto;
 }
 
 .image-product {
@@ -111,14 +139,16 @@ body {
 	position: relative;
 }
 .sort-select {
-	margin-left: 44px;
+	margin-left: 20px;
 	margin-bottom: 7px;
+	width: 300px;
+	display: inline-block;
 }
 .sort-select > select {
 	width: 195px;
 }
 .paginator {
-	margin-left: 7px;
+	margin-top: 7px;
 }
 
 .form-reg {
@@ -225,4 +255,55 @@ body {
 }
 .user-text > p{
 	font-size: 20px;
+}
+
+.settings {
+	display: inline-block;
+	width: 250px;
+	height: 100%;
+	margin: 5px 10px;
+	background-color: white;
+	border-radius: 5px;
+	padding: 5px 10px 10px;
+}
+
+.toastr-container {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	top: 50px;
+	right: 0;
+	padding: 10px;
+}
+.toastr {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	width: 200px;
+	margin: 5px 0px;
+	font: 400 16px Roboto;
+	background-color: rgba(0,0,255,.1);
+	border: 1px solid black;
+	border-radius: 10px;
+}
+.toastr-msg {
+	margin: 10px;
+}
+.appear {
+	animation-name: appear;
+	animation-duration: .3s;
+}
+.exit {
+	position: absolute;
+	top: 0;
+	right: 5px;
+	cursor: pointer;
+}
+@keyframes appear {
+	0% {
+		top: -11px;
+	}
+	100% {
+		top: 0;
+	}
 }

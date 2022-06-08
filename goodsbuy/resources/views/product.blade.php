@@ -1,6 +1,7 @@
 @extends('layout.app')
 
 @section('custom_scripts')
+	<script src="{{ asset('public/js/custom_script.js')}}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script>
@@ -24,7 +25,7 @@
 	});
 
 	function addToCart(id) {
-		let qty = parseInt($("#quantity").val())
+		let qty = parseInt($("#quantity").val());
 		$.ajax({
 			url: "{{route('addtocart')}}",
 			type: "POST",
@@ -34,8 +35,10 @@
 				_token: $("input[name='_token']").val()
 			},
 			success: function() {
+				toaster("Товар добавлен");
 				let total_qty = parseInt($('.cart-qty').text());
 				$('.cart-qty').text(total_qty+qty);
+				$("#quantity").val(1);
 			}
 		});
 	}

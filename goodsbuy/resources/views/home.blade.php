@@ -1,6 +1,7 @@
 @extends('layout.app')
 
 @section('custom_scripts')
+	<script src="{{ asset('public/js/custom_script.js')}}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script>
@@ -9,6 +10,8 @@
 			event.preventDefault();
 			let id = $(this).data('id');
 			addToCart(id);
+			let total_qty = parseInt($('.cart-qty').text());
+			$('.cart-qty').text(total_qty+1);
 		});
 	});
 
@@ -22,8 +25,7 @@
 				_token: $("input[name='_token']").val()
 			},
 			success: function() {
-				let total_qty = parseInt($('.cart-qty').text());
-				$('.cart-qty').text(total_qty+1);
+				toaster("Товар добавлен");
 			}
 		});
 	}
@@ -34,7 +36,7 @@
 
 @section('body')
 <h1 class="header">Актуальные предложения</h1>
-<div class="goods">
+<div class="main-goods">
 
 	@foreach($goods as $good)
 	<form class="goods-form">
@@ -50,7 +52,7 @@
 				<p>{{ $good->cat_name  }}</p>
 				<p class="desc">{{ $good->short }}</p>
 				<p>{{ number_format($good->cost,2,',',' ') }} руб.</p>
-				<button class="w-100 btn btn-lg btn-outline-primary cart-button" data-id="{{$good->id}}">В корзину</button>
+				<button class="w-100 btn btn-sm btn-outline-primary cart-button" data-id="{{$good->id}}">В корзину</button>
 			</div>
         </div>
     </form>
