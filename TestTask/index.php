@@ -119,10 +119,14 @@
 							<li><span class="text-dark">Свободный тестостерон</span></li>
 							<li><span class="text-dark">Глобулин, связывающий половые гормоны</span></li>
 						</ul>
-						<p class="h5 my-3">Всего <?=$slide['cost']?> Р
-							<?php //если есть скидка, то показываем её
-							if ($slide['discount'] < $slide['cost']) echo " <small class='h6 text-muted'><del>".$slide['discount']." Р</del></small>"?>
-						</p>
+						
+						<?php //если есть скидка, то показываем её
+						if ($slide['discount'] < $slide['cost']) 
+							echo "<p class='h5 my-3'>Всего ".$slide['discount']." Р <small class='h6 text-muted'><del>".$slide['cost']."  Р </del></small></p>";
+						else 
+							echo" <p class='h5 my-3'>Всего ".$slide['cost']." Р </p>";
+						?>
+						
 						<div class="row d-flex flex-row justify-content-center">
 							<div class="col-xs-12 col-lg-6 nav-link"><a class="btn btn-green btn-sm px-5" href="/">Записаться</a></div>
 							<div class="col-xs-12 col-lg-6 nav-link"><a class="btn btn-outline-green btn-sm px-5" href="/">Подробнее</a></div>
