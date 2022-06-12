@@ -40,7 +40,7 @@
 					<button class="btn btn-green btn-sm my-1" id="btnSub">Записаться на приём</div>
 				</li>
 			</ul>
-		</div>				
+		</div>			
 			
     </div>
     </nav>
