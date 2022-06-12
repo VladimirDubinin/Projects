@@ -30,17 +30,17 @@
 		</ul>
 				
 		<div class="d-flex justify-content-end">	
-			<ul class="navbar-nav me-auto mb-md-0">
+			<ul class="navbar-nav me-auto mb-md-0 collapse navbar-collapse" id="navbars01">
 				<li class="nav-item d-flex flex-column justify-content-center">
 					<a class="nav-link fw-bolder me-2 font-weight-normal" href="/">
 						<i class="fa fa-whatsapp icon" aria-hidden="true"></i> 
 						+7(863) 000 00 00</a>
 				</li>		
-				<li class="nav-item collapse navbar-collapse" id="navbars01">
-					<button class="btn btn-green btn-sm mt-1" id="btnSub">Записаться на приём</div>
+				<li class="nav-item">
+					<button class="btn btn-green btn-sm my-1" id="btnSub">Записаться на приём</div>
 				</li>
 			</ul>
-		</div>			
+		</div>				
 			
     </div>
     </nav>
