@@ -10,9 +10,6 @@
 			event.preventDefault();
 			let id = $(this).data('id');
 			addToCart(id);
-			let total_qty = parseInt($('.cart-qty').text()); // + товар в корзине в шапке
-			$('.cart-qty').text(total_qty+qty);
-			$("#quantity").val(1);
 		});
 		
 		$(".quantity-left-minus").click(function(){   // -1 товар в корзину
@@ -39,6 +36,9 @@
 			},
 			success: function() {
 				toaster("Товар добавлен");   // показываем всплывающее сообщение
+				let total_qty = parseInt($('.cart-qty').text()); // + товар в корзине в шапке
+				$('.cart-qty').text(total_qty+qty);
+				$("#quantity").val(1);
 			}
 		});
 	}
