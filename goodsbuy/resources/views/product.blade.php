@@ -6,25 +6,28 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script>
 	$(document).ready(function() {
-		$(".cart-button").click(function(event){
+		$(".cart-button").click(function(event){   // нажатие кнопки "В корзину"
 			event.preventDefault();
 			let id = $(this).data('id');
 			addToCart(id);
+			let total_qty = parseInt($('.cart-qty').text()); // + товар в корзине в шапке
+			$('.cart-qty').text(total_qty+qty);
+			$("#quantity").val(1);
 		});
 		
-		$(".quantity-left-minus").click(function(){
-			let value = parseInt($("#quantity").val());
+		$(".quantity-left-minus").click(function(){   // -1 товар в корзину
+			let value = parseInt($("#quantity").val()); // но не меньше 1
 			if(value-1 > 0) $("#quantity").val(value-1); else $("#quantity").val(1);
 		});
 		
-		$(".quantity-right-plus").click(function(){
-			let value = parseInt($("#quantity").val());
+		$(".quantity-right-plus").click(function(){ // +1 товар в корзину
+			let value = parseInt($("#quantity").val()); // но не больше 999
 			if(value+1 < 1000) $("#quantity").val(value+1); else $("#quantity").val(999);
 		});
 	
 	});
 
-	function addToCart(id) {
+	function addToCart(id) {  // функция добавить товар из корзину
 		let qty = parseInt($("#quantity").val());
 		$.ajax({
 			url: "{{route('addtocart')}}",
@@ -35,10 +38,7 @@
 				_token: $("input[name='_token']").val()
 			},
 			success: function() {
-				toaster("Товар добавлен");
-				let total_qty = parseInt($('.cart-qty').text());
-				$('.cart-qty').text(total_qty+qty);
-				$("#quantity").val(1);
+				toaster("Товар добавлен");   // показываем всплывающее сообщение
 			}
 		});
 	}

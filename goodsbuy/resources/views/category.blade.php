@@ -6,21 +6,21 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script>
 	$(document).ready(function() {
-		$(".btn-add").click(function(event){
+		$(".btn-add").click(function(event){  // нажатие кнопки "В корзину"
 			event.preventDefault();
 			let id = $(this).data('id');
 			addToCart(id);
-			let total_qty = parseInt($('.cart-qty').text());
+			let total_qty = parseInt($('.cart-qty').text());  // + товар в корзине в шапке
 			$('.cart-qty').text(total_qty+1);
 		});
 		
-		$('select').on('change',function(){
+		$('select').on('change',function(){ // функция сортировки товаров
 			let orderby = $("#sort").val();
-			let url = new URL(window.location.href);
-			let min = url.searchParams.get("min");
+			let url = new URL(window.location.href); // берем текущие параметры фильтров товаров
+			let min = url.searchParams.get("min"); // из адресной строки
 			let max = url.searchParams.get("max");
 			let vendor = url.searchParams.get("vendor");
-			$.ajax({
+			$.ajax({  // Запрос к БД с новой сортировкой и выбранными фильтрами
 				url: "{{route('category', $alias)}}",
 				type: "GET",
 				data: {
@@ -30,8 +30,8 @@
 					vendor: vendor,
 					_token: $("input[name='_token']").val()
 				},
-				success: function(data) {
-					let posParam = location.pathname.indexOf('?');
+				success: function(data) { // добавляем в адресную строку новые параметры сортировки и фильтра
+					let posParam = location.pathname.indexOf('?'); 
 					let url = location.pathname.substring(posParam,location.pathname.length);
 					let newurl = url+'?';
 					if(orderby) newurl+= 'orderby=' + orderby+'&';
@@ -45,15 +45,15 @@
 			});
 		});
 		
-		$('#settings').on('submit',function(){
+		$('#settings').on('submit',function(){ // функция добавить новый фильтр товаров
 			event.preventDefault();
-			let url = new URL(window.location.href);
-			let orderby = url.searchParams.get("orderby");
+			let url = new URL(window.location.href);  // берем текущие параметры сортировки
+			let orderby = url.searchParams.get("orderby"); // из адресной строки
 			
 			let min = $("input[name=cost]:checked").attr('data-min');
 			let max = $("input[name=cost]:checked").attr('data-max');
 			let vendor = $("input[name=vendor]:checked").attr('data-value');
-			$.ajax({
+			$.ajax({  // Запрос к БД с новым фильтрами и выбранной сортировкой 
 				url: "{{route('category', $alias)}}",
 				type: "GET",
 				data: {
@@ -63,7 +63,7 @@
 					vendor: vendor,
 					_token: $("input[name='_token']").val()
 				},
-				success: function(data) {
+				success: function(data) { // добавляем в адресную строку новые параметры сортировки и фильтра
 					let posParam = location.pathname.indexOf('?');
 					let url = location.pathname.substring(posParam,location.pathname.length);
 					let newurl = url+'?';
@@ -79,7 +79,7 @@
 		});
 	});
 
-	function addToCart(id) {
+	function addToCart(id) { // функция добавить товар из корзину
 		$.ajax({
 			url: "{{route('addtocart')}}",
 			type: "POST",
@@ -89,7 +89,7 @@
 				_token: $("input[name='_token']").val()
 			},
 			success: function() {
-				toaster("Товар добавлен");
+				toaster("Товар добавлен"); // показываем всплывающее сообщение
 			}
 		});
 	}

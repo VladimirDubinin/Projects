@@ -6,7 +6,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script>
 	$(document).ready(function() {
-		$(".cart-button").click(function(event){
+		$(".cart-button").click(function(event){ // нажатие кнопки "В корзину"
 			event.preventDefault();
 			let id = $(this).data('id');
 			addToCart(id);
@@ -14,7 +14,7 @@
 			$('.cart-qty').text(total_qty+1);
 		});
 		
-		$('select').on('change',function(){
+		$('select').on('change',function(){ 
 			var sort = $("#sort").val();
 			var cat = $("#category").val();
 			$.ajax({
@@ -31,7 +31,7 @@
 		});
 	});
 
-	function addToCart(id) {
+	function addToCart(id) { // функция добавить товар из корзину
 		$.ajax({
 			url: "{{route('addtocart')}}",
 			type: "POST",
@@ -41,7 +41,7 @@
 				_token: $("input[name='_token']").val()
 			},
 			success: function() {
-				toaster("Товар добавлен");
+				toaster("Товар добавлен");  // показываем всплывающее сообщение
 			}
 		});
 	}

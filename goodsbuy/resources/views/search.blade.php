@@ -5,17 +5,17 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script>
-	$(document).ready(function() {
+	$(document).ready(function() {    // нажатие кнопки "В корзину"
 		$(".cart-button").click(function(event){
 			event.preventDefault();
 			let id = $(this).data('id');
 			addToCart(id);
 			let total_qty = parseInt($('.cart-qty').text());
-			$('.cart-qty').text(total_qty+1);
+			$('.cart-qty').text(total_qty+1);  // + товар в корзине в шапке
 		});
 	});
 
-	function addToCart(id) {
+	function addToCart(id) { // функция добавить товар из корзину
 		$.ajax({
 			url: "{{route('addtocart')}}",
 			type: "POST",
@@ -25,7 +25,7 @@
 				_token: $("input[name='_token']").val()
 			},
 			success: function() {
-				toaster("Товар добавлен");
+				toaster("Товар добавлен");   // показываем всплывающее сообщение
 			}
 		});
 	}

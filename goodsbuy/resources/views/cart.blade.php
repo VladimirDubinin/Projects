@@ -5,12 +5,12 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script>
 	$(document).ready(function() {
-		$(".btn-end").click(function(event){
+		$(".btn-end").click(function(event){ // кнопка Эоформить заказ"
 			let itog = parseInt($(".itog").text());
-			if (itog == 0) event.preventDefault();
+			if (itog == 0) event.preventDefault(); // если товаров нет в корзине, кнопка не сработает
 		});
 		
-		$(".btn-delete").click(function(event){
+		$(".btn-delete").click(function(event){ // удаление товара из корзины
 			event.preventDefault();
 			let id = $(this).data('id');
 			let qty = $(this).data('qty');
@@ -19,7 +19,7 @@
 		});
 	});
 	
-	function deleteFromCart(id,qty) {
+	function deleteFromCart(id,qty) { // удалить товар из корзины
 		let total_qty = parseInt($('.cart-qty').text());
 		$('.cart-qty').text(total_qty-qty);
 		$.ajax({

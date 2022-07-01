@@ -14,7 +14,7 @@
 		});
 	});
 	
-	function deleteGoods(id,count) {
+	function deleteGoods(id,count) { // удаление товара
 		$.ajax({
 			url: "{{route('delete')}}",
 			type: "POST",
