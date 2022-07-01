@@ -1,11 +1,11 @@
-$(document).ready(function() {
-	$("#del").bind("click", function(e) {
-		e.preventDefault();
+$(document).ready(function() { // удаление комменариев на странице viewing.php
+	$("#del").bind("click", function(e) { // обработчик нажатия на крестик
+		e.preventDefault(); 
 		let id = $("#com-id").val();
 		let fc = $(this).parents("#form-comment");
-		if (id !== '') {
+		if (id !== '') { // удаляем комментарий ajax-запросом
 			$.ajax({
-				url: "php/commdelete.php",
+				url: "php/commdelete.php", // удаление из БД
 				type: "POST",
 				data: ({id}),
 				success: function(data) {
@@ -13,7 +13,7 @@ $(document).ready(function() {
 						console.log('Ошибка удаления');
 					} else
 					if(data == 'Success'){
-						fc.remove();
+						fc.remove(); // удаление со страницы, есил из БД удалено успешно
 					}
 				},
 				error: function() {

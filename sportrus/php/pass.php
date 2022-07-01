@@ -1,4 +1,4 @@
-<?php
+<?php // модуль для смены пароля в личном кабинете
 if(isset($_POST['id'],$_POST['oldpass'],$_POST['newpass1'])) {
 	$id = $_POST['id'];
 	$oldpass = trim($_POST['oldpass']); 

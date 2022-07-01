@@ -1,4 +1,4 @@
-<?php
+<?php // модуль для загрузки нового комментария в БД
 if(isset($_POST['id'],$_POST['comm'],$_POST['nid'])) {
 	$id = $_POST['id'];
 	$comm = trim($_POST['comm']);

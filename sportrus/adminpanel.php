@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if($_SESSION['userid'] != 1) {
+if($_SESSION['userid'] != 1) { // страница ТОЛЬКО для админа. можно добавить или удалить новость
 	header('Location: http://sportrus/');
 }
 ?>
@@ -17,7 +17,7 @@ if($_SESSION['userid'] != 1) {
 </head>
 <body>
 	<div class="cite-body">
-		<?php require('inc/header.php'); ?>
+		<?php require_once('inc/header.php'); ?>
 		<main class="container">
 			<h1>Панель администратора</h1>
 			<form class="comment-add" action="php/addnews.php" method="POST" enctype="multipart/form-data">
@@ -42,7 +42,7 @@ if($_SESSION['userid'] != 1) {
 			<div class="comments-container">
 			<?php	
 			$q = $db->query("SELECT * FROM news ORDER BY date DESC");
-			foreach ($q as $res) {
+			foreach ($q as $res) { // список всех новостей (с возможностью удаления)
 				$date = date('H:i d.m.Y ',strtotime($res['date']));
 			?>
 			
@@ -60,7 +60,7 @@ if($_SESSION['userid'] != 1) {
 			?>
 			</div>
 		</main>
-		<?php require('inc/footer.php'); ?>
+		<?php require_once('inc/footer.php'); ?>
 	</div>
 </body>
 </html>

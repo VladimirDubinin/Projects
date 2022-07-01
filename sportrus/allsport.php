@@ -1,7 +1,7 @@
 <?php 
 session_start();
-if(!isset($_GET['sport'])) {
-	header('Location: http://sportrus/');
+if(!isset($_GET['sport'])) { // страница просмотра событий по одной теме
+	header('Location: http://sportrus/'); // если тема не выбрана, редирект на главную
 }
 else $sport_id = $_GET['sport'];
 ?>
@@ -16,7 +16,7 @@ else $sport_id = $_GET['sport'];
 </head>
 <body>
 	<div class="cite-body">
-	<?php require('inc/header.php');
+	<?php require_once('inc/header.php');
 	$q = $db->query("SELECT * FROM sports WHERE sport_id = $sport_id");
 	if($q->num_rows == 1) {
 		$sport = $q->fetch_assoc();
@@ -34,15 +34,15 @@ else $sport_id = $_GET['sport'];
 					<p class="ms">МАТЧИ<a href="allmatches.php">Все матчи</a></p>
 					<div class="match-form-main">
 						<div class="match-list">	
-							<?php
+							<?php // вывод последних матчей по теме в две таблицы
 							$col1 = ceil($count/2);
 							$col2 = $count - $col1;
 
 							$q = $db->query("SELECT * FROM matches WHERE sport = $sport_id AND date BETWEEN DATE_ADD(CURDATE(), INTERVAL $startdate DAY) AND DATE_ADD(CURDATE(), INTERVAL $enddate DAY) ORDER BY date DESC LIMIT $col1 OFFSET 0");
-							foreach ($q as $match) {
+							foreach ($q as $match) { // первая таблица
 								if($match['ended'] == false) {
 									$date = strtotime($match['date']);
-									$separator = date('H',$date).' : '.date('i',$date);			//чтобы внешне отличать несыгранные и сыгранные матчи
+									$separator = date('H',$date).' : '.date('i',$date);	//чтобы внешне отличать несыгранные и сыгранные матчи
 								} else {
 									$separator = $match['hostgoals'].' - '.$match['guestgoals'];								
 								}
@@ -63,10 +63,10 @@ else $sport_id = $_GET['sport'];
 						<div class="match-list">
 							<?php
 							$q = $db->query("SELECT * FROM matches WHERE sport = $sport_id AND date BETWEEN DATE_ADD(CURDATE(), INTERVAL $startdate DAY) AND DATE_ADD(CURDATE(), INTERVAL $enddate DAY) ORDER BY date DESC LIMIT $col2 OFFSET $col1");
-							foreach ($q as $match) {
+							foreach ($q as $match) {  // вторая таблица
 								if($match['ended'] == false) {
 									$date = strtotime($match['date']);
-									$separator = date('H',$date).' : '.date('i',$date);			//чтобы внешне отличать несыгранные и сыгранные матчи
+									$separator = date('H',$date).' : '.date('i',$date);	//чтобы внешне отличать несыгранные и сыгранные матчи
 								} else {
 									$separator = $match['hostgoals'].' - '.$match['guestgoals'];								
 								}
@@ -89,7 +89,7 @@ else $sport_id = $_GET['sport'];
 				?>
 			<div class="main-news">
 				<p class="ms">НОВОСТИ<a href="allnews.php?page=1">Все новости</a></p>
-				<?php
+				<?php // Все новости по теме (с пагинацией)
 				$page = (isset($_GET['page'])) ? $_GET['page'] : 1;
 				$limit = 6;
 				$offset = $limit * ($page - 1);
@@ -111,7 +111,7 @@ else $sport_id = $_GET['sport'];
 				?>	
 				
 				<div class="paginate">
-					<?php $i = ($page - 1 > 0) ? $i = $page - 1 : $i = 1; ?>
+					<?php $i = ($page - 1 > 0) ? $i = $page - 1 : $i = 1; // Навигация по страницам ?>
 					<a href="allsport.php?sport=<?=$sport_id?>&page=1"><button class="btn-page"><<</button></a>
 					<a href="allsport.php?sport=<?=$sport_id?>&page=<?=$i?>"><button class="btn-page"><</button></a>
 					<?php
@@ -135,7 +135,7 @@ else $sport_id = $_GET['sport'];
 	} else {
 	?>
 	<h1>Категория не найдена</h1>	
-	<?php } require('inc/footer.php'); ?>
+	<?php } require_once('inc/footer.php'); ?>
 	</div>
 </body>
 </html>	

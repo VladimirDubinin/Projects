@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['userid'])) {
+if(!isset($_SESSION['userid'])) { // страница личного кабинета. если пользователь не авторизован, редирект на страницу авторизации
 	header('Location: http://sportrus/authorization.php');
 }
 ?>
@@ -18,7 +18,7 @@ if(!isset($_SESSION['userid'])) {
 </head>
 <body>
 	<div class="cite-body">
-		<?php require('inc/header.php'); 
+		<?php require_once('inc/header.php'); 
 		
 		$login = $_SESSION['userid'];
 		$user = $db->query("SELECT * FROM users WHERE id = '$login'")->fetch_assoc();
@@ -47,7 +47,7 @@ if(!isset($_SESSION['userid'])) {
 					<input class="btn-change" id="send-info" type="submit" value="Изменить информацию">
 				</form>	
 				
-				<?php if($_SESSION['userid'] != 1) { ?>			
+				<?php if($_SESSION['userid'] != 1) { // если пользователь admin, то ему можно менять свой пароль ?>			
 				<form class="comment-add" id="form-pass" action="" method="POST">
 					<p class="ms">ИЗМЕНИТЬ ПАРОЛЬ</p>
 					<input type="password" class="write-pass" id="oldpass" name="oldpass" placeholder="Введите старый пароль" maxlength="20">
@@ -56,13 +56,14 @@ if(!isset($_SESSION['userid'])) {
 					<input type="hidden" id="userid" name="userid" value="<?=$_SESSION['userid']?>"><br>
 					<input class="btn-change" id="send-pass" type="submit" value="Изменить пароль">
 				</form>	
-				<?php } else echo '<a href="adminpanel.php"><button class="btn-change">Панель администратора</button></a>'?>
+				<?php } else // если пользователь admin, то у него есть ссылка на админку для добавления и удаления новостей
+				echo '<a href="adminpanel.php"><button class="btn-change">Панель администратора</button></a>'?>
 				
 			</div>	
 		</main>
 
 		<?php 
-		require('inc/footer.php'); 
+		require_once('inc/footer.php'); 
 		?>
 	</div>
 </body>

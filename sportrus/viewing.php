@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if(!isset($_GET['id'])) {
+if(!isset($_GET['id'])) {  // страница просмотра новости. если id не указан, редирект на главную
 	header('Location: http://sportrus/');
 }
 else $id = $_GET['id'];
@@ -19,10 +19,10 @@ else $id = $_GET['id'];
 </head>
 <body>
 	<div class="cite-body">
-		<?php require('inc/header.php'); ?>
+		<?php require_once('inc/header.php'); ?>
 		
 		<main class="container">
-		<?php
+		<?php // Вывод из БД содержания новости
 		$q = $db->query("SELECT * FROM news INNER JOIN sports ON theme=sport_id WHERE id = '$id'");
 		if($q->num_rows == 1) {
 			$news = $q->fetch_assoc();
@@ -39,7 +39,7 @@ else $id = $_GET['id'];
 			</div>
 			<div class="container-add">
 				<p class="ms">ПОХОЖИЕ НОВОСТИ</p><hr>
-				<?php
+				<?php // Вывод из БД списка последних новостей по этой же теме
 				$theme = $news['theme'];
 				$title = $news['title'];
 				$q = $db->query("SELECT id,title,theme,date FROM news WHERE theme = '$theme' AND title<>'$title' ORDER BY date DESC LIMIT 10");
@@ -54,7 +54,7 @@ else $id = $_GET['id'];
 			</div>	
 			
 			<div class="comments-container">
-				<?php if(isset($_SESSION['userid'])) { ?>
+				<?php if(isset($_SESSION['userid'])) { // если пользователь авторизован, он может оставить комментарий ?>
 				<form class="comment-add" id="form-comment" action="" method="POST">
 					<p class="ms">Добавить комментарий</p><br>
 					<textarea class="write-com" id="comm" name="comm" placeholder="Введите комментарий" maxlength="255"></textarea>
@@ -71,7 +71,7 @@ else $id = $_GET['id'];
 				<p class="ms">КОММЕНТАРИИ</p><br>
 				<?php } 
 				$q = $db->query("SELECT * FROM comments INNER JOIN users ON comments.user_id = users.id WHERE news_id = '$id' ORDER BY date DESC");
-				foreach ($q as $res) {
+				foreach ($q as $res) { // Вывод комментариев к новости
 					$date = date('H:i d.m.Y ',strtotime($res['date']));
 					?>
 					<form class="comment" id="form-comment" action="" method="POST">
@@ -102,7 +102,7 @@ else $id = $_GET['id'];
 		?>
 		</main>
 
-		<?php require('inc/footer.php'); ?>
+		<?php require_once('inc/footer.php'); ?>
 	</div>
 </body>
 </html>

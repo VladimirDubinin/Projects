@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if(!isset($_GET['id'])) {
+if(!isset($_GET['id'])) { // страница просмотра матча, если id матча не указан, редирект на главную
 	header('Location: http://sportrus/');
 }
 else $id = $_GET['id'];
@@ -19,12 +19,12 @@ else $id = $_GET['id'];
 </head>
 <body>
 	<div class="cite-body">
-		<?php require('inc/header.php'); ?>
+		<?php require_once('inc/header.php'); ?>
 		
 		<main class="container">
-		<?php
+		<?php // Данные о матче
 		$q = $db->query("SELECT * FROM matches INNER JOIN sports ON sport=sport_id WHERE id = '$id'");
-		if($q->num_rows == 1) {
+		if($q->num_rows == 1) { 
 			$match = $q->fetch_assoc();
 			$date = date('h:i d.m.Y',strtotime($match['date']));
 			$sport_id = $match['sport_id'];
@@ -41,12 +41,12 @@ else $id = $_GET['id'];
 
 			<div class="container-matchadd">
 				<p class="match-add-head">МАТЧИ ТУРА</p><hr>
-				<?php
+				<?php // Вывод списка похожих матчей
 				$q = $db->query("SELECT * FROM matches INNER JOIN sports ON sport = sport_id WHERE sport = $sport_id ORDER BY date DESC LIMIT 10");
 				foreach ($q as $match) {
 					if($match['ended'] == false) {
 						$date = strtotime($match['date']);
-						$separator = date('H',$date).' : '.date('i',$date);			//чтобы внешне отличать несыгранные и сыгранные матчи
+						$separator = date('H',$date).' : '.date('i',$date);	//чтобы внешне отличать несыгранные и сыгранные матчи
 					} else {
 						$separator = $match['hostgoals'].' - '.$match['guestgoals'];								
 					}
@@ -65,7 +65,7 @@ else $id = $_GET['id'];
 			
 			<div class="main-news">
 				<p class="ms">НОВОСТИ ПО ТЕМЕ <a href="allnews.php?page=1">Все новости</a></p>
-				<?php
+				<?php // Вывод списка последних новостей из того же вида спорта
 				$q = $db->query("SELECT * FROM news INNER JOIN sports ON theme = sport_id WHERE theme = $sport_id ORDER BY date DESC LIMIT 10");
 				foreach ($q as $res) {
 				?>
@@ -77,7 +77,7 @@ else $id = $_GET['id'];
 				<? } ?>
 			</div>
 		<?php
-		} else {
+		} else { 
 		?>
 		<h1>Матч не найден</h1>
 		<?php
@@ -85,7 +85,7 @@ else $id = $_GET['id'];
 		?>
 		</main>
 
-		<?php require('inc/footer.php'); ?>
+		<?php require_once('inc/footer.php'); ?>
 	</div>
 </body>
 </html>

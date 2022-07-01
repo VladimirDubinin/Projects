@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if(!isset($_GET['id'])) {
+if(!isset($_GET['id'])) { // страница просмотра информации о пользователе. если id пользователя не указан, редирект на главную
 	header('Location: http://sportrus/');
 }
 else $id = $_GET['id'];
@@ -18,9 +18,9 @@ else $id = $_GET['id'];
 	<div class="cite-body">
 		<main class="container">
 		<?php 
-		require('inc/header.php'); 
+		require_once('inc/header.php'); 
 		$q = $db->query("SELECT * FROM users WHERE id = '$id'");
-		if($q->num_rows == 1) {
+		if($q->num_rows == 1) { // вывод информации о пользователе
 			$user = $q->fetch_assoc();
 			$date = date('d.m.Y H:i',strtotime($user['regdate']))
 			?>
@@ -42,7 +42,7 @@ else $id = $_GET['id'];
 		?>
 		
 		</main><br><br>
-		<?php require('inc/footer.php'); ?>
+		<?php require_once('inc/footer.php'); ?>
 	</div>
 </body>
 </html>

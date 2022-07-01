@@ -53,7 +53,7 @@
 	width: 452px;
 	border: 1px solid black;
 	margin: 20px auto;
-	padding: 10px;
+	padding: 10px 10px 10px 30px;
 	font: 400 18px 'Roboto';
 	visibility: hidden;
 }

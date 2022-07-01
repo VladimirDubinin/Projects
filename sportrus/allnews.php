@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php session_start(); // страница просмотра всех новостей на сайте ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -8,17 +8,17 @@
 </head>
 <body>
 	<div class="cite-body">
-		<?php require('inc/header.php'); ?>
+		<?php require_once('inc/header.php'); ?>
 		
 		<main class="container">
 			<h1>Новости</h1>
 			<div class="main-news">
-				<?php 
+				<?php // Пагинация. вывод по 10 новостей на странице
 				$page = (isset($_GET['page'])) ? $_GET['page'] : 1;
 				$limit = 10;
 				$offset = $limit * ($page - 1);
 				$q = $db->query("SELECT * FROM news ORDER BY date DESC LIMIT $limit OFFSET $offset");
-				foreach ($q as $news) {
+				foreach ($q as $news) { // Вывод всех новостей текущей страницы
 				?>
 				<div class="news-form">
 					<img src="<?=$news['img']?>" alt="<?=$news['title']?>" width="450" height="255">
@@ -33,7 +33,7 @@
 				}
 				?>	
 				<div class="paginate">
-					<?php $i = ($page - 1 > 0) ? $i = $page - 1 : $i = 1; ?>
+					<?php $i = ($page - 1 > 0) ? $i = $page - 1 : $i = 1; // навигация по страницам ?>
 					<a href="allnews.php?page=1"><button class="btn-page"><<</button></a>
 					<a href="allnews.php?page=<?=$i?>"><button class="btn-page"><</button></a>
 					<?php
@@ -54,7 +54,7 @@
 			</div>			
 		</main>
 
-		<?php require('inc/footer.php'); ?>
+		<?php require_once('inc/footer.php'); ?>
 	</div>
 </body>
 </html>

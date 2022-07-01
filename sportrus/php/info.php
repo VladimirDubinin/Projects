@@ -1,4 +1,4 @@
-<?php
+<?php // модуль для смены информации о пользователе в личном кабинете
 if(isset($_POST['id'],$_POST['surn'],$_POST['name'],$_POST['lastn'],$_POST['about'])) {
 	$id = $_POST['id'];
 	$surn = trim($_POST['surn']);

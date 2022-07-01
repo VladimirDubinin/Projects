@@ -1,4 +1,4 @@
-<?php
+<?php // завершение сессии
 session_start();
 session_destroy();
 

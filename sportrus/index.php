@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php session_start(); // Главная страница ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -11,13 +11,13 @@
 </head>
 <body>
 	<div class="cite-body">
-		<?php require('inc/header.php'); ?>
+		<?php require_once('inc/header.php'); // шапка сайта ?>
 		
 		<main class="container">
 			<h1>Главная</h1>
 			<div class="main-matches">
 				<p class="ms">БЛИЖАЙШИЕ МАТЧИ <a href="allmatches.php">Все матчи</a></p>
-				<?php
+				<?php // Выбираем список видов спорта, для которых есть матчи в таблице matches (подключение к БД в dbconnect.php)
 				$count = $db->query('SELECT DISTINCT(sport) as id,sport_name,alias FROM matches INNER JOIN sports ON sport = sport_id');
 				foreach($count as $vid_sporta) {
 					$id = $vid_sporta['id'];
@@ -27,7 +27,7 @@
 				<div class="match-form-main">
 					<div class="match-list">	
 						<p class="t-cap <?=$alias?>"><a href="allsport.php?sport=<?=$id?>&page=1"><?=mb_strtoupper($name)?></a></p>
-						<?php
+						<?php // Выбираем список матчей, для каждого вида спорта
 						$q = $db->query("SELECT * FROM matches INNER JOIN sports ON sport = sport_id WHERE sport = $id ORDER BY date DESC LIMIT 5");
 						foreach ($q as $match) {
 							if($match['ended'] == false) {
@@ -56,22 +56,20 @@
 			
 			<div class="main-news slider-container">
 				<p class="ms">ПОСЛЕДНИЕ НОВОСТИ <a href="allnews.php?page=1">Все новости</a></p>
-				<?php
+				<?php // На каждый вид спорта делаем по слайдеру, но не больше четырёх
 				$themes = $db->query("SELECT theme,count(theme) FROM news GROUP BY theme ORDER BY count(theme) DESC LIMIT 4");
 				foreach($themes as $theme){
 					?> <div class="slider"> <?php
-					$id = $theme['theme'];
+					$id = $theme['theme']; // Выбираем 5 последних новостей для каждого слайдера
 					$query = $db->query("SELECT * FROM news INNER JOIN sports ON theme=sport_id WHERE theme=$id ORDER BY date DESC LIMIT 5");
-					foreach($query as $news){
+					foreach($query as $news){ 
 					?>
 					<div class="slide fade">
 						<img src="<?=$news['img']?>" class="slide-img" alt="Picture">
 						<div class="slide-head-text"><a href="allsport.php?sport=<?=$news['sport_id']?>&page=1"><?=$news['sport_name']?></a></div>
 						<div class="slide-img-text"><a href="viewing.php?id=<?=$news['id']?>"><?=$news['title']?></a></div>
 					</div>
-					<?
-					}
-					?> 
+					<? } ?> 
 					<div class="dot-container">
 					<?php for($i = 0; $i < $query->num_rows; $i++) { ?>
 						<span class="dot" data-num="<?=$i?>"></span>
@@ -79,12 +77,11 @@
 					</div>	
 					<a class="prev">&#10094</a>
 					<a class="next">&#10095</a>
-					</div> <?
-				}
-				?>	
+					</div> 
+				<? } ?>	
 			</div>			
 		</main>
-		<?php require('inc/footer.php'); ?>
+		<?php require_once('inc/footer.php'); ?>
 	</div>
 </body>
 </html>

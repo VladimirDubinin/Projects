@@ -1,4 +1,4 @@
-<?php
+<?php // Файл с данными для подключения к БД
 $db_adress = 'localhost';
 $db_login = 'root';
 $db_pass = '';

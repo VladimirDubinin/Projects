@@ -1,4 +1,4 @@
-<?php
+<?php // модуль для удаления комментария из БД
 if(isset($_POST['id'])) {
 	$id = $_POST['id'];
 	require('dbconnect.php');

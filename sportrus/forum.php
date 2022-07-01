@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php session_start(); // Страница отзывов ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -11,12 +11,12 @@
 </head>
 <body>
 	<div class="cite-body">
-		<?php require('inc/header.php'); ?>
+		<?php require_once('inc/header.php'); ?>
 		
 		<main class="container">
 			<h1>Отзывы и предложения</h1>
 			<div class="comments-container">
-				<?php if(isset($_SESSION['userid'])) {?>
+				<?php if(isset($_SESSION['userid'])) { // если юзер авторизован, он может оставить свой отзыв о сайте ?>
 				<form class="comment-add" id="form-comment" action="" method="POST">
 					<p class="ms">Добавить отзыв</p>
 					<input type="text" class="write-theme" id="theme" name="theme" placeholder="Введите тему" maxlength="50">
@@ -33,7 +33,7 @@
 				<p class="ms">ОТЗЫВЫ</p><br>
 				<?php }
 				$q = $db->query("SELECT * FROM reviews INNER JOIN users ON reviews.user_id = users.id ORDER BY reviews.date DESC");
-				foreach ($q as $res) {
+				foreach ($q as $res) { // Вывод всех отзывов
 					$date = date('H:i d.m.Y ',strtotime($res['date']));
 				?>
 					<div class="review">
@@ -48,7 +48,7 @@
 			</div>				
 		</main>
 
-		<?php require('inc/footer.php'); ?>
+		<?php require_once('inc/footer.php'); ?>
 	</div>
 </body>
 </html>

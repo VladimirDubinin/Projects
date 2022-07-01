@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['userid'])) {
+if(isset($_SESSION['userid'])) { // страница регистрации. если пользователь уже авторизован, редирект в личный кабинет
 	header("Location: http://sportrus/usercabinet.php");
 }
 ?>
@@ -28,7 +28,7 @@ if(isset($_SESSION['userid'])) {
 			<div class="message" id="message"></div>
 		</form>
 		
-	<?php require('inc/footer.php'); ?>
+	<?php require_once('inc/footer.php'); ?>
 	</div>
 </body>
 </html>	

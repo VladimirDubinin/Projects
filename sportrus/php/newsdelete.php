@@ -1,4 +1,4 @@
-<?php
+<?php // модуль для удаления новости из БД
 if(isset($_POST['id'])) {
 	$id = $_POST['id'];
 	require('dbconnect.php');

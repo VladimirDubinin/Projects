@@ -14,7 +14,7 @@
 				<p>Виды спорта</p>
 				<ul class="submenu">
 				<?php
-				require('php/dbconnect.php');
+				require_once('php/dbconnect.php'); //Подключение к БД для выбора доступных видов спорта для ниспадающего списка в шапке
 				$q = $db->query("SELECT * FROM sports");
 				for ($i = 0; $i < $q->num_rows; $i++) {
 					$res = $q->fetch_assoc();
@@ -29,7 +29,7 @@
 		</div>
 		
 		
-		<?php 
+		<?php // Если пользователь не авторизован, показываются кнопки регистрации и авторизации
 		if(!isset($_SESSION['userid']) && !isset($_SESSION['username'])) {
 		?>
 		<div class="nav-bar-unlog">
@@ -37,7 +37,7 @@
 			<a href="registration.php" class="nav-link-btn"><span>Регистрация</span></a>
 		</div>	
 		<?php 
-		} else {
+		} else { // иначе показываются логин и кнопка выхода из профиля 
 		?>
 		<div class="nav-bar-log">
 			<a href="usercabinet.php" class="nav-link-nick"><span><?=$_SESSION['username']?></span></a>

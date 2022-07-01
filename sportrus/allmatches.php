@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php session_start(); // страница просмотра всех матчей?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -10,13 +10,13 @@
 </head>
 <body>
 	<div class="cite-body">
-		<?php require('inc/header.php'); 
+		<?php require_once('inc/header.php'); 
 		if(isset($_GET['sdate'],$_GET['fdate'])) {
-			$sdate = $_GET['sdate'];
+			$sdate = $_GET['sdate']; //если переданы начальная и конечная даты, выводятся матчи из заданного периода
 			$fdate = $_GET['fdate'];
-		} else {
+		} else { //если нет, то выводятся матчи из периода по умолчанию
 			$sdate = date('Y-m-d', strtotime('-1 year'));
-			$fdate = date("Y-m-d");
+			$fdate = date("Y-m-d"); 
 		}
 		?>
 		
@@ -33,8 +33,8 @@
 						<button class="btn-show" id="show">Применить</button>
 					</div>	
 				</div>
-				<?php
-				$count = $db->query("SELECT count(id) as c,sport,sport_name,alias FROM matches INNER JOIN sports ON sport = sport_id WHERE date BETWEEN '$sdate' AND '$fdate' group by sport");
+				<?php // Выбираем список видов спорта, для которых есть матчи в таблице matches
+				$count = $db->query("SELECT DISTINCT(sport) as sport,sport_name,alias FROM matches INNER JOIN sports ON sport = sport_id WHERE date BETWEEN '$sdate' AND '$fdate' group by sport");
 				foreach($count as $vid_sporta) {
 					$id = $vid_sporta['sport'];
 					$name = $vid_sporta['sport_name'];
@@ -43,12 +43,12 @@
 				<div class="match-form-main">
 					<div class="match-list">	
 						<p class="t-cap <?=$alias?>"><a href="allsport.php?sport=<?=$id?>&page=1"><?=mb_strtoupper($name)?></a></p>
-						<?php
+						<?php  // Выбираем список матчей, для каждого вида спорта
 						$q = $db->query("SELECT * FROM matches WHERE sport = $id AND date BETWEEN '$sdate' AND '$fdate' ORDER BY date DESC");
 						foreach ($q as $match) {
 							if($match['ended'] == false) {
 								$date = strtotime($match['date']);
-								$separator = date('H',$date).' : '.date('i',$date);			//чтобы внешне отличать несыгранные и сыгранные матчи
+								$separator = date('H',$date).' : '.date('i',$date);	//чтобы внешне отличать несыгранные и сыгранные матчи
 							} else {
 								$separator = $match['hostgoals'].' - '.$match['guestgoals'];								
 							}
@@ -72,7 +72,7 @@
 			</div>		
 		</main>
 
-		<?php require('inc/footer.php'); ?>
+		<?php require_once('inc/footer.php'); ?>
 	</div>
 </body>
 </html>

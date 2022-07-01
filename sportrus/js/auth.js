@@ -1,30 +1,29 @@
-$(document).ready( function() {
-	$('#formauth').bind("submit", function(e) {
+$(document).ready( function() { // обработчик для страницы "Авторизация"
+	$('#formauth').bind("submit", function(e) {  // нажатие кнопки "авторизоваться"
 		e.preventDefault();
 		var message = $("#message");
 		var login = $("#login").val();
 		var pass = $("#pass").val();
 		
-		if (login === '') {
+		var errors = []; // валидация логина и пароля
+		if (login === '') errors.push("Введите логин!");  
+		else if (login.length < 3 || login.length > 20) 
+			errors.push("Логин должен быть от 3 до 20 символов!");
+		if (pass === '') errors.push("Введите пароль!");	
+		else if (pass.length < 5 || pass.length > 20) 
+			errors.push("Пароль должен быть от 5 до 20 символов!");
+
+		if (errors.length > 0) { // вывод ошибок на экран в элемент message
+			message.html("");
 			message.css("visibility", "visible");
-			message.html("Введите логин!");	
-		} else 
-		if (login.length < 3 || login.length > 20) {
-			message.css("visibility", "visible");
-			message.html("Логин должен быть от 3 до 20 символов!");
-		} else	
-		if (pass === '') {	
-			message.css("visibility", "visible");
-			message.html("Введите пароль!");	
-		} else
-		if (pass.length < 5 || pass.length > 20) {
-			message.css("visibility", "visible");
-			message.html("Пароль должен быть от 5 до 20 символов!");
-		} else {
+			for(let i = 0; i < errors.length; i++) {
+				message.append("<li>"+errors[i]+"</li>");
+			} 
+		} else { // если ошибок нет, скрываем message
 			message.css("visibility", "hidden");
 			message.html("");
-			$.ajax({
-				url: "php/auth.php",
+			$.ajax({ // и отправляем ajax-запрос для авторизации пользователя
+				url: "php/auth.php", // в auth.php запрос к базе для проверки правильности введённых логина и пароля
 				type: "POST",
 				data: ({login,pass}),
 				success: function(data) {
@@ -37,7 +36,7 @@ $(document).ready( function() {
 						message.html("Неверный логин или пароль!");	
 					} else
 					if(data == 'Success'){
-						window.location.replace(document.referrer);
+						window.location.replace(document.referrer);  // если регистрация успешна, то возвращаемся на предыдущую страницу
 					}
 				},
 				error: function() {
