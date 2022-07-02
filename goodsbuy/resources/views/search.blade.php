@@ -51,7 +51,7 @@
 				<div class="image">
 					<img src="{{ $good->img }}" width="150" alt="Picture">
 				</div>
-				<p>{{ $good->cat_name }}</p>
+				<p><a class="link" href="{{ route('category', $alias = $good->alias) }}">{{ $good->cat_name  }}</a></p>
 				<p class="desc">{{ $good->short }}</p>
 				<p>{{ number_format($good->cost,2,',',' ') }} руб.</p>
 				<button class="w-100 btn btn-sm btn-outline-primary cart-button" data-id="{{$good->id}}">В корзину</button>

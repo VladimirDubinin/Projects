@@ -47,7 +47,7 @@
 
 @section('body')
 @if(isset($good))
-	<h3> {{$good->cat_name}} {{$good->name}}</h3>
+	<h3> <a class="link" href="{{ route('category', $alias = $good->alias) }}">{{$good->cat_name}}</a> {{$good->name}}</h3>
 	<form class="container borders flex">
 	@csrf
 		<div class="image-product" >
